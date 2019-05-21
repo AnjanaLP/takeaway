@@ -1,9 +1,10 @@
 require 'takeaway'
 
 describe Takeaway do
-  subject(:takeaway)  { described_class.new(menu: menu, order: order) }
+  subject(:takeaway)  { described_class.new(menu: menu, order: order, printer: printer_class) }
   let(:menu)          { double :menu, view: items, has_dish?: true  }
   let(:order)         { double :order, basket: { salad: 3 }, total: 11.75, add: nil }
+  let(:printer_class) { double :printer_class }
   let(:items)         { { salad: 4.75, soup: 3.50, sandwich: 6.25 } }
 
   describe '#view_menu' do
@@ -48,6 +49,22 @@ describe Takeaway do
       takeaway.choose(:salad, 1)
       takeaway.choose(:soup, 2)
       expect(takeaway.view_total).to eq 11.75
+    end
+  end
+
+  describe '#submit_order' do
+    it 'calls the printer to print confirmation' do
+      allow(order).to receive(:empty_basket?).and_return false
+      expect(printer_class).to receive(:print_confirmation)
+      takeaway.submit_order
+    end
+
+    context 'when no items chosen' do
+      it 'raise an error' do
+        allow(order).to receive(:empty_basket?).and_return true
+        message = "Cannot submit order: no items chosen"
+        expect{ takeaway.submit_order }.to raise_error message
+      end
     end
   end
 end

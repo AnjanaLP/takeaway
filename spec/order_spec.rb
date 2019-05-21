@@ -10,6 +10,17 @@ describe Order do
     end
   end
 
+  describe '#empty_basket?' do
+    it 'knows if the basket is empty' do
+      expect(order.empty_basket?).to be true
+    end
+
+    it 'knows if the basket is not empty' do
+      order.add(:salad, 3)
+      expect(order.empty_basket?).to be false
+    end
+  end
+
   describe '#add' do
     it 'adds the dish with quantity to the basket' do
       order.add(:salad, 3)

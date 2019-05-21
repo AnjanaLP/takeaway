@@ -17,6 +17,10 @@ class Order
     end.inject(:+)
   end
 
+  def empty_basket?
+    basket.empty?
+  end
+
   private
 
   attr_reader :menu
