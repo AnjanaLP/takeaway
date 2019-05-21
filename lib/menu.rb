@@ -12,6 +12,10 @@ class Menu
     !items[dish].nil?
   end
 
+  def price(dish)
+    items[dish]
+  end
+
   private
 
   attr_reader :items

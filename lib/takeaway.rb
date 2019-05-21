@@ -2,7 +2,7 @@ require_relative 'order'
 
 class Takeaway
 
-  def initialize(menu:, order: Order.new)
+  def initialize(menu:, order: Order.new(menu))
     @menu = menu
     @order = order
   end
@@ -16,6 +16,10 @@ class Takeaway
     raise "Cannot add #{dish}: invalid quantity chosen" if invalid?(quantity)
     order.add(dish, quantity)
     basket_summary
+  end
+
+  def view_total
+    order.total
   end
 
   private

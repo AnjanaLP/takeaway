@@ -30,4 +30,13 @@ describe 'User Stories' do
       expect{ takeaway.choose(:salad, 0) }.to raise_error message
     end
   end
+
+  # As a customer
+  # So that I know how much I am spending
+  # I would like to check the total sum of the dishes I have selected
+  it 'customer can check the total sum of their selected dishes' do
+    takeaway.choose(:salad, 1)
+    takeaway.choose(:soup, 2)
+    expect(takeaway.view_total).to eq 11.75
+  end
 end

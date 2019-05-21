@@ -19,4 +19,10 @@ describe Menu do
       expect(menu.has_dish?(:pizza)).to be false
     end
   end
+
+  describe '#price' do
+    it 'returns the price of a dish' do
+      expect(menu.price(:salad)).to eq 4.75
+    end
+  end
 end
