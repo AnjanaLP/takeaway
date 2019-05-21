@@ -8,6 +8,10 @@ class Menu
     items
   end
 
+  def has_dish?(dish)
+    !items[dish].nil?
+  end
+
   private
 
   attr_reader :items

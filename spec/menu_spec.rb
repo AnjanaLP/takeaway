@@ -9,4 +9,14 @@ describe Menu do
       expect(menu.view).to eq items
     end
   end
+
+  describe '#has_dish?' do
+    it 'knows if a dish is on the menu' do
+      expect(menu.has_dish?(:salad)).to be true
+    end
+
+    it 'knows if a dish is not on the menu' do
+      expect(menu.has_dish?(:pizza)).to be false
+    end
+  end
 end
